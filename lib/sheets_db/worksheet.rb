@@ -1,3 +1,4 @@
+require 'bigdecimal/util'
 require_relative "worksheet/column"
 require_relative "worksheet/row"
 
@@ -167,8 +168,8 @@ module SheetsDB
       converted_value = case attribute_definition[:type].to_s
       when "Integer"
         raw_value.to_i
-      when "Float"
-        raw_value.to_f
+      when "Decimal"
+        raw_value.to_d
       when "DateTime"
         DateTime.strptime(raw_value, "%m/%d/%Y %H:%M:%S")
       when "Boolean"

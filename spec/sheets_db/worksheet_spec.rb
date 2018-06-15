@@ -1,3 +1,5 @@
+require 'bigdecimal'
+
 RSpec.describe SheetsDB::Worksheet do
   let(:raw_worksheet) {
     instance_double(GoogleDrive::Worksheet,
@@ -235,8 +237,8 @@ RSpec.describe SheetsDB::Worksheet do
       expect(subject.convert_value("14", { type: Integer })).to eq(14)
     end
 
-    it "returns float value if type is Float" do
-      expect(subject.convert_value("1.54", { type: Float })).to eq(1.54)
+    it "returns BigDecimal value if type is Decimal" do
+      expect(subject.convert_value("1.54", { type: :Decimal })).to eq(BigDecimal.new("1.54"))
     end
 
     it "returns DateTime value if type is DateTime" do
